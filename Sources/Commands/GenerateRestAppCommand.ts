@@ -5,6 +5,7 @@ import * as path from 'path';
 import * as shell from 'shelljs';
 import * as Mustache from 'mustache';
 import {Logger} from '../Logger';
+import { TemplateManager } from "../Core/TemplateManager";
 
 const SKIP_FILES = ['node_modules', '.template.json', '.git'];
 const CURR_DIR = process.cwd();
@@ -19,7 +20,7 @@ export class GenerateRestAppCommand implements BaseCommand{
         .option("-a","App Name")
         .action(this.processCommandAction)
     };
-     processCommandAction(args: any, cb: Function): void {
+     async processCommandAction(args: any, cb: Function): Promise<void> {
         this.logger = new Logger();
         var appName = args.appname;
         var templatePath = path.join(__dirname,'../templates/restserver')
@@ -30,9 +31,13 @@ export class GenerateRestAppCommand implements BaseCommand{
         var templateValues = {
             appname: appName
         }
+        // Preparing Templates if Not Exits
+        var templateManager= new TemplateManager();
+        await templateManager.downLoadTemplate();
         new GenerateRestAppCommand().createDirectoryContents(templatePath,appName, templateValues)
         this.logger.info("project Successfully created @",CURR_DIR + `/${appName}`)
-        // fs.mkdirSync(path.join(CURR_DIR, appName, "test"));
+        // Clearing Everything which not required
+        templateManager.deleteTemplateDir();
         this.logger.info(new GenerateRestAppCommand().printInstructions());
         cb();
     }
