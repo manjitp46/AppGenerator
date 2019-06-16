@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2017",
+    "types" : ["node"],
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "outDir": "build",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowJs": true
+  },
+  "exclude": ["node_modules"]
+}
