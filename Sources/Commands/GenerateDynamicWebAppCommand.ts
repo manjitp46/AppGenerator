@@ -8,12 +8,12 @@ import { FileManager } from "../Core/FileManager";
 import { ConfigManager } from "../Core/ConfigManger";
 
 const CURR_DIR = process.cwd();
-export class GenerateRestAppCommand implements BaseCommand {
+export class GenerateDynamicWebAppCommand implements BaseCommand {
   logger: Logger;
   constructor() {}
   registerCommand(vorpalApp: any): void {
     vorpalApp
-      .command("generaterestapp <appname>", "Command to generating RestApp")
+      .command("generatewebapp <appname>", "Command to generating Dynamic WebApp")
       .option("-l", "Logging Required")
       .option("-a", "App Name")
       .action(this.processCommandAction);
@@ -27,7 +27,7 @@ export class GenerateRestAppCommand implements BaseCommand {
     );
     var templatePath = path.join(
       __dirname,
-      congigManager.getSettingValue("RestServerApp", "TemplatePath")
+      congigManager.getSettingValue("DynamicWebApp", "TemplatePath")
     );
     this.logger.info("Generating Application @", path.join(CURR_DIR, appName));
     // Creating app Dir
@@ -51,7 +51,7 @@ export class GenerateRestAppCommand implements BaseCommand {
     );
     // Clearing Everything which not required
     templateManager.deleteTemplateDir();
-    this.logger.info(new GenerateRestAppCommand().printInstructions());
+    this.logger.info(new GenerateDynamicWebAppCommand().printInstructions());
     cb();
   }
 
