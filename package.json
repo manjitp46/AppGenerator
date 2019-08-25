@@ -8,9 +8,6 @@
     "prepare": "npm run build"
   },
   "main": "index.js",
-  "bin": {
-    "appgenerator": "build/Apps/AppGenerator.js"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
