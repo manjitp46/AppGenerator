@@ -2,14 +2,14 @@
   "name": "appgenerator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "bin": {
-    "appgenerator": "build/Apps/AppGenerator.js"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf build && tsc && node Sources/buildscript.js",
     "prepare": "npm run build"
+  },
+  "main": "index.js",
+  "bin": {
+    "appgenerator": "build/Apps/AppGenerator.js"
   },
   "keywords": [],
   "author": "",
