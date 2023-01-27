@@ -1,7 +1,8 @@
 import { Logger } from "../Logger";
 import * as path from "path";
 import { ConfigManager } from "./ConfigManger";
-const Git = require("nodegit");
+// const Git = require("nodegit");
+const simpleGit = require('simple-git');
 import * as shell from "shelljs";
 
 export class TemplateManager {
@@ -37,16 +38,25 @@ export class TemplateManager {
     var url = this.getTemplateUrl();
     try {
       this.logger.info("Downloading template @", url);
-      var result = await Git.Clone(
-        url,
-        path.join(
-          __dirname,
-          `../${this.congigManager.getSettingValue(
-            "Templates",
-            "TemplateRootDir"
-          )}`
-        )
-      );
+      var templateRootDir = path.join(
+        __dirname,
+        `../${this.congigManager.getSettingValue(
+          "Templates",
+          "TemplateRootDir"
+        )}`
+      )
+      shell.mkdir(templateRootDir)
+      var result = await simpleGit(templateRootDir).clone(url)
+      // var result = await Git.Clone(
+      //   url,
+      //   path.join(
+      //     __dirname,
+      //     `../${this.congigManager.getSettingValue(
+      //       "Templates",
+      //       "TemplateRootDir"
+      //     )}`
+      //   )
+      // );
       this.logger.info("Successfully downloaded template from", url);
     } catch (e) {
       this.logger.error(e);
