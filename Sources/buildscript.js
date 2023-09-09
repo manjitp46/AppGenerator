@@ -22,5 +22,16 @@ function copyConf() {
     }
 }
 
+function copyPackageJson() {
+    try {
+        copy(path.join(__dirname,"../package.json"), path.join(__dirname,"../build/"),(err,file)=>{
+            console.log("File", "Cpoied")
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 addShebang();
 copyConf();
+copyPackageJson();

@@ -2,10 +2,16 @@
   "name": "appgenerator",
   "version": "1.0.0",
   "description": "",
+  "bin": {
+    "appgenerator": "./Apps/AppGenerator.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf build && tsc && node Sources/buildscript.js",
-    "prepare": "tsc && node Sources/buildscript.js"
+    "prepare": "tsc && node Sources/buildscript.js",
+    "package-linux": "pkg -t node16-linux build/",
+    "package-mac": "pkg -t node16-mac build/",
+    "package-win": "pkg -t node16-win build/"
   },
   "main": "index.js",
   "keywords": [],
@@ -23,7 +29,8 @@
     "rimraf": "2.6.3",
     "shelljs": "^0.8.3",
     "simple-git": "3.16.0",
-    "vorpal": "1.12.0"
+    "vorpal": "1.12.0",
+    "pkg": "^5.8.0"
   },
   "devDependencies": {
     "@types/mustache": "^0.8.32",
